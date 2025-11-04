@@ -2,6 +2,13 @@
 This code was written in 2019, and I was not very familiar with transformer model in that time.
 So don't trust this code too much. Currently I am not managing this code well, so please open pull requests if you find bugs in the code and want to fix.
 
+### Tips
+What This Repository Adds Compared to the Upstream Repository
+
+1. Added a quickstart guide — The upstream repository does not provide detailed information about the required Python version or dependencies.
+2. Added comments to parts of the code — Improved code readability with explanatory inline comments.
+3. Included datasets support — However, automatic dataset downloading appears to be failing.
+4. Added JSON-based vocabulary files — Makes the vocabulary more human-readable and intuitive.
 
 # QuickStart
 ```bash
