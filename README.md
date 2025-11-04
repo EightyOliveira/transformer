@@ -2,6 +2,23 @@
 This code was written in 2019, and I was not very familiar with transformer model in that time.
 So don't trust this code too much. Currently I am not managing this code well, so please open pull requests if you find bugs in the code and want to fix.
 
+
+# QuickStart
+```bash
+
+conda create -n myenv python=3.7 -y
+
+conda activate myenv
+
+conda install pytorch==1.9.0 torchtext==0.10.0
+ 
+conda install spacy=3.0.0 -c conda-forge
+
+python -m spacy download en_core_web_sm
+
+python -m spacy download de_core_news_sm
+```
+
 # Transformer
 My own implementation Transformer model (Attention is All You Need - Google Brain, 2017)
 <br><br>
