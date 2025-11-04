@@ -44,14 +44,36 @@ class Transformer(nn.Module):
         output = self.decoder(trg, enc_src, trg_mask, src_mask)
         return output
 
+
     def make_src_mask(self, src):
+        """
+        build Padding Mask
+        """
         src_mask = (src != self.src_pad_idx).unsqueeze(1).unsqueeze(2)
+        # eg [ <sos>  hello pad pad .. <eos>]
+        # mask[ False False True True .. False]
+        # shape: [Batch,1,1,Length]
         return src_mask
 
+
+    
     def make_trg_mask(self, trg):
+        """
+        #build Causal Mask
+        """
         trg_pad_mask = (trg != self.trg_pad_idx).unsqueeze(1).unsqueeze(3)
         trg_len = trg.shape[1]
+        
         trg_sub_mask = torch.tril(torch.ones((trg_len, trg_len), device=trg.device, dtype=torch.bool))
+        
+        # e.g if trg_len = 4
+        # trg_sub_mask =
+        #     [[ True, False, False, False],
+        #     [ True,  True, False, False],
+        #     [ True,  True,  True, False],
+        #     [ True,  True,  True,  True]]
+        
+        
         # trg_sub_mask = torch.tril(torch.ones(trg_len, trg_len)).type(torch.ByteTensor).to(self.device)
         trg_mask = trg_pad_mask & trg_sub_mask
         return trg_mask

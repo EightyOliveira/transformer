@@ -55,13 +55,21 @@ criterion = nn.CrossEntropyLoss(ignore_index=src_pad_idx)
 def train(model, iterator, optimizer, criterion, clip):
     model.train()
     epoch_loss = 0
+    # batch_size = 128
     for i, batch in enumerate(iterator):
+        # [128,src] [128,trg]
         src = batch.src
         trg = batch.trg
-
         optimizer.zero_grad()
+        #  except the last one (<eos>)
+        # as the decoder input
+        # e.g    <sos>  hello world <eos>
         output = model(src, trg[:, :-1])
+        # output.shape = [batch_size, trg_len - 1, vocab_size]
+        # to [batch_size * (trg_len - 1), vocab_size]
         output_reshape = output.contiguous().view(-1, output.shape[-1])
+        
+        #[batch_size, trg_len - 1] to [batch_size * (trg_len - 1)]
         trg = trg[:, 1:].contiguous().view(-1)
 
         loss = criterion(output_reshape, trg)

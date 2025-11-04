@@ -40,6 +40,9 @@ class DataLoader:
         self.target.build_vocab(train_data, min_freq=min_freq)
 
     def make_iter(self, train, validate, test, batch_size, device):
+        
+        #make the sentence lengths within the same batch as similar as possible
+        #minimizing the padding overhead
         train_iterator, valid_iterator, test_iterator = BucketIterator.splits((train, validate, test),
                                                                               batch_size=batch_size,
                                                                               device=device)
