@@ -6,13 +6,13 @@ So don't trust this code too much. Currently I am not managing this code well, s
 # QuickStart
 ```bash
 
-conda create -n myenv python=3.7 -y
+conda create -n transformer-env python=3.7 -y
 
-conda activate myenv
+conda activate transformer-env
 
 conda install pytorch==1.9.0 torchtext==0.10.0
  
-conda install spacy=3.0.0 -c conda-forge
+conda install spacy=3.0.0
 
 python -m spacy download en_core_web_sm
 
